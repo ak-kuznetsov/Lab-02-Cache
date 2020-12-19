@@ -11,12 +11,12 @@
 #include <cmath>
 #include <sstream>
 
-const int Cache_Size[3] = {256, 1024, 8192};
-const int Num_Research = 3;
-const int Test_Count = 1000;
-const int Num_byte_In_Long_double = 16;
-const int Num_b_In_kb = 1024;
-const int Num_Data = 4;
+const int Cache_Size[3]{256, 1024, 8192};
+const int Num_Research{3};
+const int Test_Count{1000};
+const int Num_byte_In_Long_double{16};
+const int Num_b_In_kb{1024};
+const int Num_Data{4};
 
 enum Type {
     Straight, Reverse, Random
