@@ -23,7 +23,7 @@ void Cache::Find_Exp_Size() {
     }
     for (int i = 0; i < Num_Experiment; ++i) {
         Experiment_Size[i] = Experiment_Size[i] *
-                Num_b_In_kb /
+                             Num_b_In_kb /
                              Num_byte_In_Long_double;
     }
 }
