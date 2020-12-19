@@ -6,6 +6,6 @@
 
 TEST(Cache, EmptyTest) {
     std::vector<Type> types {Straight, Reverse, Random};
-    Cache cacher(types);
+    Cache cacher{types};
     std::cout << cacher;
 }
