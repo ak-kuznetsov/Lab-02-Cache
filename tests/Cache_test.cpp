@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 
 TEST(Cache, EmptyTest) {
-    std::vector<Type> types = {Straight, Reverse, Random};
+    std::vector<Type> types {Straight, Reverse, Random};
     Cache cacher(types);
     std::cout << cacher;
 }
