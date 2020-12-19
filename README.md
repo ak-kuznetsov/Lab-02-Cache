@@ -1,4 +1,8 @@
 # Лабораторная работа №2
+| branch | status |
+|--------|--------|
+|developer|[![Build Status](https://travis-ci.com/ak-kuznetsov/Lab-02-Cache.svg?branch=developer )](https://travis-ci.org/github/ak-kuznetsov/Lab-02-Cache)|
+
 
 В большинстве современных ПК используется следующая иерархия памяти:
 | Тип | Скорость доступа | Размер |
@@ -130,31 +134,108 @@ cache_size['3'] = 8 mb;
 
 Для получения времени обхода от размера массива процедуру прохода необходимо многократно повторить (порядка 1000 раз).
 
-### Результаты
-
-Ниже представлен формат и пример отчета:
-
+## Результаты
 ```yaml
-investigation:                                       |  investigaion:
-  travel_variant: <вариант_прохода>                  |    travel_order: "direction"
-  experiments:                                       |    experiments:
-  - experiment:                                      |    - experiment:
-      number:                                        |        number: 1
-      input_data:                                    |        input_data:
-        buffer_size: <размер_буфера>                 |          buffer_size: "1mb"
-      results:                                       |        results:
-        duration: <продолжительность>                |          duration: "1ns"
-  - experiment:                                      |    - experiment:
-      number: <номер_эксперимента>                   |        number: 2
-      input_data:                                    |        input_data:
-        buffer_size: <размер_буфера>                 |          buffer_size: "2mb"
-      results:                                       |        results:
-        duration: <продолжительность>                |          duration: "2ns"
-                                                     |
-investigation:                                       |  investigation:
-...                                                  |  ...
+  investigation:
+      travel_variant: Straight
+      experiments:
+    - do_experiment:
+    		      number: 1
+    		      input_data:
+    			  buffer_size: 128 kb
+      results:
+    			  duration: 68035 nanoseconds
+    - do_experiment:
+    		      number: 2
+    		      input_data:
+    			  buffer_size: 1 mb
+      results:
+    			  duration: 357208 nanoseconds
+    - do_experiment:
+    		      number: 3
+    		      input_data:
+    			  buffer_size: 2 mb
+      results:
+    			  duration: 375081 nanoseconds
+    - do_experiment:
+    		      number: 4
+    		      input_data:
+    			  buffer_size: 4 mb
+      results:
+    			  duration: 729704 nanoseconds
+    - do_experiment:
+    		      number: 5
+    		      input_data:
+    			  buffer_size: 12 mb
+      results:
+    			  duration: 2413688 nanoseconds
+
+ investigation:
+    	 travel_variant: Reverse
+    	 experiments:
+    - do_experiment:
+    		number: 1
+    		input_data:
+    			buffer_size: 128 kb
+    		results:
+    			duration: 16587 nanoseconds
+    - do_experiment:
+    		number: 2
+    		input_data:
+    			buffer_size: 1 mb
+    		results:
+    			duration: 143527 nanoseconds
+    - do_experiment:
+    		number: 3
+    		input_data:
+    			buffer_size: 2 mb
+    		results:
+    			duration: 280657 nanoseconds
+    - do_experiment:
+    		number: 4
+    		input_data:
+    			buffer_size: 4 mb
+    		results:
+    			duration: 567309 nanoseconds
+    - do_experiment:
+    		number: 5
+    		input_data:
+    			buffer_size: 12 mb
+    		results:
+    			duration: 1919501 nanoseconds
+investigation:
+    	 travel_variant: Random
+    	 experiments:
+    - do_experiment:
+    		number: 1
+    		input_data:
+    			buffer_size: 128 kb
+    		results:
+    			duration: 157196 nanoseconds
+    - do_experiment:
+    		number: 2
+    		input_data:
+    			buffer_size: 1 mb
+    		results:
+    			duration: 1384578 nanoseconds
+    - do_experiment:
+    		number: 3
+    		input_data:
+    			buffer_size: 2 mb
+    		results:
+    			duration: 2829063 nanoseconds
+    - do_experiment:
+    		number: 4
+    		input_data:
+    			buffer_size: 4 mb
+    		results:
+    			duration: 5828140 nanoseconds
+    - do_experiment:
+    		number: 5
+    		input_data:
+    			buffer_size: 12 mb
+    		results:
+    			duration: 24557583 nanoseconds                                       
 ```
 
-### Рекомендации
 
-При создание неиспользуемых переменных для считывание данных из буфера можно использовать аттрибут `[[maybe_unused]]`
