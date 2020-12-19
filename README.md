@@ -238,5 +238,5 @@ investigation:
     			duration: 24557583 nanoseconds                                       
 ```
 Диаграмма, построенная по полученным значениям:
-![Cache](/home/akuznetsov/1.jpg)
+![Cache](./images/1.png)
 
