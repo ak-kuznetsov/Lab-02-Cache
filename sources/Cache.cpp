@@ -32,13 +32,13 @@ Cache::Cache(std::vector<Type> types) {
     Find_Exp_Size();
     Duration.resize(Num_Research);
     auto arr = new long double[Experiment_Size.back()];
-    for (int i = 0; i < Experiment_Size.back(); i += Num_Data) {
+    for (int i = 0; i < Experiment_Size.back(); i += Num) {
         arr[i] = random();
     }
     long double k = 0;
     for (int i = 0;
          i < Experiment_Size.back();
-         i += Num_Data) {
+         i += Num) {
         k += arr[i];
     }
     for (int t = 0; t < 3; ++t) {
@@ -50,7 +50,7 @@ Cache::Cache(std::vector<Type> types) {
                             std::chrono::high_resolution_clock::now();
                     for (int i = 0;
                          i < Experiment_Size[j] * Test_Count;
-                         i += Num_Data) {
+                         i += Num) {
                         k += arr[i % Experiment_Size[j]];
                     }
                     std::chrono::system_clock::time_point end =
@@ -66,7 +66,7 @@ Cache::Cache(std::vector<Type> types) {
                             std::chrono::high_resolution_clock::now();
                     for (int i = Experiment_Size[j] * Test_Count;
                          i > 0;
-                         i -= Num_Data) {
+                         i -= Num) {
                         k += arr[i % Experiment_Size[j]];
                     }
                     std::chrono::system_clock::time_point end =
@@ -84,7 +84,7 @@ Cache::Cache(std::vector<Type> types) {
                             std::chrono::high_resolution_clock::now();
                     for (int i = 0;
                          i < Experiment_Size[j] * Test_Count;
-                         i += Num_Data) {
+                         i += Num) {
                         n = random() % Experiment_Size[j];
                         while (used_num.find(n) != used_num.end()) {
                             break;

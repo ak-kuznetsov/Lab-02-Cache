@@ -16,25 +16,25 @@ const int Num_Research{3};
 const int Test_Count{1000};
 const int Num_byte_In_Long_double{16};
 const int Num_b_In_kb{1024};
-const int Num_Data{4};
+const int Num{4};
 
 enum Type {
     Straight, Reverse, Random
 };
 
 class Cache {
-public:
-    explicit Cache(std::vector<Type>);
-
-    void Find_Exp_Size();
-
-    friend std::ostream& operator<<(std::ostream&, const Cache&);
-
 private:
     int Num_Experiment = 0;
     std::vector<std::vector<int>> Duration;
     std::vector<int> Experiment_Size;
     std::vector<std::string> Experiment_Size_Name;
     std::string Experiment_Type_Name[Num_Research];
+
+public:
+    explicit Cache(std::vector<Type>);
+
+    void Find_Exp_Size();
+
+    friend std::ostream& operator<<(std::ostream&, const Cache&);
 };
 #endif // INCLUDE_CACHE_HPP_
