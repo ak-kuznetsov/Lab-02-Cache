@@ -102,12 +102,12 @@ Cache::Cache(std::vector<Type> types) {
     delete[] arr;
 }
 
-std::ostream& operator<<(std::ostream& tab, const Cache& cacher) {
+std::ostream& operator<<(std::ostream& os, const Cache& cacher) {
     for (int i = 0; i != Num_Research; ++i) {
-        tab << "investigation:\n\t travel_variant: " <<
+        os << "investigation:\n\t travel_variant: " <<
             cacher.Experiment_Type_Name[i] << "\n\t experiments:\n";
         for (int j = 0; j != cacher.Num_Experiment; ++j) {
-            tab << "\t- do_experiment:\n\t\tnumber: " << j + 1 <<
+            os << "\t- do_experiment:\n\t\tnumber: " << j + 1 <<
                 "\n\t\tinput_data:\n\t\t\tbuffer_size: " <<
                 cacher.Experiment_Size_Name[j] <<
                 "\n\t\tresults:\n\t\t\tduration: " <<
@@ -115,5 +115,5 @@ std::ostream& operator<<(std::ostream& tab, const Cache& cacher) {
                 " nanoseconds\n";
         }
     }
-    return tab;
+    return os;
 }
