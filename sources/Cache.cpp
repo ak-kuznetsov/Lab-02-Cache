@@ -15,16 +15,16 @@ void Cache::Find_Exp_Size() {
         std::ostringstream os;
         if (Exp_Size[i] < byte_in_kb) {
             os << Exp_Size[i];
-            Exp_Size_Name.push_back(os.str() + " kb");
+            Buffer_Size.push_back(os.str() + " kb");
         } else {
             os << Exp_Size[i] / byte_in_kb;
-            Exp_Size_Name.push_back(os.str() + " mb");
+            Buffer_Size.push_back(os.str() + " mb");
         }
     }
     for (int i = 0; i < Num_Exp; ++i) {
         Exp_Size[i] = Exp_Size[i] *
                 byte_in_kb /
-                byte_in_long_double;
+                item;
     }
 }
 
@@ -44,7 +44,7 @@ Cache::Cache(std::vector<Type> types) {
     for (int t = 0; t < 3; ++t) {
         switch (types[t]) {
             case Straight:
-                Exp_Type_Name[t] = "Straight";
+                Exp_Name[t] = "Straight";
                 for (int j = 0; j < Num_Exp; ++j) {
                     std::chrono::system_clock::time_point start =
                             std::chrono::high_resolution_clock::now();
@@ -60,7 +60,7 @@ Cache::Cache(std::vector<Type> types) {
                 }
                 break;
             case Reverse:
-                Exp_Type_Name[t] = "Reverse";
+                Exp_Name[t] = "Reverse";
                 for (int j = 0; j < Num_Exp; ++j) {
                     std::chrono::system_clock::time_point start =
                             std::chrono::high_resolution_clock::now();
@@ -76,7 +76,7 @@ Cache::Cache(std::vector<Type> types) {
                 }
                 break;
             case Random:
-                Exp_Type_Name[t] = "Random";
+                Exp_Name[t] = "Random";
                 for (int j = 0; j < Num_Exp; ++j) {
                     std::set<int> num;
                     int n = 0;
@@ -104,11 +104,11 @@ Cache::Cache(std::vector<Type> types) {
 
 std::ostream& operator<<(std::ostream& os, const Cache& cacher) {
     for (int i = 0; i != Research; ++i) {
-        os << "investigation:\n\t travel_variant: " << cacher.Exp_Type_Name[i]
+        os << "investigation:\n\t travel_variant: " << cacher.Exp_Name[i]
            << "\n\t experiments:\n";
         for (int j = 0; j != cacher.Num_Exp; ++j) {
             os << "\t- do_experiment:\n\t\tnumber: " << j + 1
-               << "\n\t\tinput_data:\n\t\t\tbuffer_size: " << cacher.Exp_Size_Name[j]
+               << "\n\t\tinput_data:\n\t\t\tbuffer_size: " << cacher.Buffer_Size[j]
                << "\n\t\tresults:\n\t\t\tduration: " << cacher.Duration[i][j]
                << " nanoseconds\n";
         }
