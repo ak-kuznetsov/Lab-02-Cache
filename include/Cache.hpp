@@ -11,12 +11,12 @@
 #include <cmath>
 #include <sstream>
 
-const int Cache_Size[3]{256, 1024, 8192};
-const int Num_Research{3};
-const int Test_Count{1000};
-const int Num_byte_In_Long_double{16};
-const int Num_b_In_kb{1024};
-const int Num{4};
+const int Size[3]{256, 1024, 8192};
+const int Research{3};
+const int Count{1000};
+const int byte_in_long_double{16};
+const int byte_in_kb{1024};
+const int byte_in_int{4};
 
 enum Type {
     Straight, Reverse, Random
@@ -24,11 +24,11 @@ enum Type {
 
 class Cache {
 private:
-    int Num_Experiment = 0;
+    int Num_Exp = 0;
     std::vector<std::vector<int>> Duration;
-    std::vector<int> Experiment_Size;
-    std::vector<std::string> Experiment_Size_Name;
-    std::string Experiment_Type_Name[Num_Research];
+    std::vector<int> Exp_Size;
+    std::vector<std::string> Exp_Size_Name;
+    std::string Exp_Type_Name[Research];
 
 public:
     explicit Cache(std::vector<Type>);
