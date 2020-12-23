@@ -24,7 +24,7 @@ void Cache::Find_Exp_Size() {
     for (int i = 0; i < Num_Exp; ++i) {
         Exp_Size[i] = Exp_Size[i] *
                 byte_in_kb /
-                item;
+                items_in_line;
     }
 }
 

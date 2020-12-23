@@ -16,7 +16,7 @@ const int Research{3};
 const int Count{1000};
 const int byte_in_kb{1024};
 const int byte_in_int{4};
-const int item{16};
+const int items_in_line{16};
 
 enum Type {
     Straight, Reverse, Random
