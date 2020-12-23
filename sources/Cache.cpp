@@ -12,13 +12,13 @@ void Cache::Find_Exp_Size() {
     }
     Num_Exp = Exp_Size.size();
     for (int i = 0; i < Num_Exp; ++i) {
-        std::ostringstream stream;
+        std::ostringstream os;
         if (Exp_Size[i] < byte_in_kb) {
-            stream << Exp_Size[i];
-            Exp_Size_Name.push_back(stream.str() + " kb");
+            os << Exp_Size[i];
+            Exp_Size_Name.push_back(os.str() + " kb");
         } else {
-            stream << Exp_Size[i] / byte_in_kb;
-            Exp_Size_Name.push_back(stream.str() + " mb");
+            os << Exp_Size[i] / byte_in_kb;
+            Exp_Size_Name.push_back(os.str() + " mb");
         }
     }
     for (int i = 0; i < Num_Exp; ++i) {
@@ -39,7 +39,7 @@ Cache::Cache(std::vector<Type> types) {
     for (int i = 0;
          i < Exp_Size.back();
          i += byte_in_int) {
-        k += arr[i];
+         k += arr[i];
     }
     for (int t = 0; t < 3; ++t) {
         switch (types[t]) {
@@ -104,15 +104,13 @@ Cache::Cache(std::vector<Type> types) {
 
 std::ostream& operator<<(std::ostream& os, const Cache& cacher) {
     for (int i = 0; i != Research; ++i) {
-        os << "investigation:\n\t travel_variant: " <<
-            cacher.Exp_Type_Name[i] << "\n\t experiments:\n";
+        os << "investigation:\n\t travel_variant: " << cacher.Exp_Type_Name[i]
+           << "\n\t experiments:\n";
         for (int j = 0; j != cacher.Num_Exp; ++j) {
-            os << "\t- do_experiment:\n\t\tnumber: " << j + 1 <<
-                "\n\t\tinput_data:\n\t\t\tbuffer_size: " <<
-                cacher.Exp_Size_Name[j] <<
-                "\n\t\tresults:\n\t\t\tduration: " <<
-                cacher.Duration[i][j] <<
-                " nanoseconds\n";
+            os << "\t- do_experiment:\n\t\tnumber: " << j + 1
+               << "\n\t\tinput_data:\n\t\t\tbuffer_size: " << cacher.Exp_Size_Name[j]
+               << "\n\t\tresults:\n\t\t\tduration: " << cacher.Duration[i][j]
+               << " nanoseconds\n";
         }
     }
     return os;
