@@ -2,7 +2,6 @@
 
 #ifndef INCLUDE_CACHE_HPP_
 #define INCLUDE_CACHE_HPP_
-
 #include <iostream>
 #include <string>
 #include <chrono>
@@ -14,9 +13,10 @@
 const int Size[3]{256, 1024, 8192};
 const int Research{3};
 const int Count{1000};
-const int byte_in_kb{1024};
+const int Kb_in_Mb{1024};
+const int byte_in_Kb{1024};
 const int byte_in_int{4};
-const int items_in_line{16};
+const int byte_in_long_double{16};
 
 enum Type {
     Straight, Reverse, Random
