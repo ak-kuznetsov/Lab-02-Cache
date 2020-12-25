@@ -16,7 +16,7 @@ const int Count{1000};
 const int Kb_in_Mb{1024};
 const int byte_in_Kb{1024};
 const int byte_in_int{4};
-const int byte_in_long_double{16};
+const int int_in_line{16};
 
 enum Type {
     Straight, Reverse, Random

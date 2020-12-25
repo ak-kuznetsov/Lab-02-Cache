@@ -23,86 +23,82 @@ void Cache::Find_Exp_Size() {
         }
     }
     /* 128Kb < 1Mb < 2Mb < 4Mb < 12Mb */
-    for (int i = 0; i < Num_Exp; ++i) {
-        Exp_Size[i] = Exp_Size[i] *
-                      byte_in_Kb /
-                      byte_in_long_double;
-    }
-    /* 8192 < 65536 < 131072 < 262144 < 786432 */
 }
 
 Cache::Cache(std::vector<Type> types) {
-    Find_Exp_Size();
-    Duration.resize(Research);
-    long double* arr = new long double[Exp_Size.back()];
-    for (int i = 0; i < Exp_Size.back(); i += byte_in_int) {
-        arr[i] = random();
-    }
-    long double k = 0;
-    for (int i = 0;
-         i < Exp_Size.back();
-         i += byte_in_int) {
-         k += arr[i];
-    }
-    for (int t = 0; t < 3; ++t) {
-        switch (types[t]) {
-            case Straight:
-                Exp_Name[t] = "Straight";
-                for (int j = 0; j < Num_Exp; ++j) {
-                    std::chrono::system_clock::time_point start =
-                            std::chrono::high_resolution_clock::now();
-                    for (int i = 0;
-                         i < Exp_Size[j] * Count;
-                         i += byte_in_int) {
-                        k += arr[i % Exp_Size[j]];
-                    }
-                    std::chrono::system_clock::time_point end =
-                            std::chrono::high_resolution_clock::now();
-                    Duration.at(t).push_back(static_cast<int>(std::chrono::
-                    nanoseconds((end - start) / Count).count()));
-                }
-                break;
-            case Reverse:
-                Exp_Name[t] = "Reverse";
-                for (int j = 0; j < Num_Exp; ++j) {
-                    std::chrono::system_clock::time_point start =
-                            std::chrono::high_resolution_clock::now();
-                    for (int i = Exp_Size[j] * Count;
-                         i > 0;
-                         i -= byte_in_int) {
-                        k += arr[i % Exp_Size[j]];
-                    }
-                    std::chrono::system_clock::time_point end =
-                            std::chrono::high_resolution_clock::now();
-                    Duration.at(t).push_back(static_cast<int>(std::chrono::
-                    nanoseconds((end - start) / Count).count()));
-                }
-                break;
-            case Random:
-                Exp_Name[t] = "Random";
-                for (int j = 0; j < Num_Exp; ++j) {
-                    std::set<int> num;
-                    int n = 0;
-                    std::chrono::system_clock::time_point start =
-                            std::chrono::high_resolution_clock::now();
-                    for (int i = 0;
-                         i < Exp_Size[j] * Count;
-                         i += byte_in_int) {
-                        n = random() % Exp_Size[j];
-                        while (num.find(n) != num.end()) {
-                            break;
-                        }
-                        k += arr[n % Exp_Size[j]];
-                    }
-                    std::chrono::system_clock::time_point end =
-                            std::chrono::high_resolution_clock::now();
-                    Duration.at(t).push_back(static_cast<int>(std::chrono::
-                    nanoseconds((end - start) / Count).count()));
-                }
-                break;
+    for (int X = 0; X < Num_Exp; ++X) {
+        Find_Exp_Size();
+        Duration.resize(Research);
+        int *arr = new int[((Exp_Size[X] * byte_in_Kb)/ byte_in_int)];
+        for (int i = 0; i < ((Exp_Size[X] * byte_in_Kb)/ byte_in_int); i += int_in_line) {
+            arr[i] = random();
         }
+        long double k = 0;
+        for (int i = 0;
+             i < ((Exp_Size[X] * byte_in_Kb)/ byte_in_int);
+             i += int_in_line) {
+            k += arr[i];
+        }
+        for (int t = 0; t < 3; ++t) {
+            switch (types[t]) {
+                case Straight:
+                    Exp_Name[t] = "Straight";
+                    for (int j = 0; j < Count; ++j) {
+                        std::chrono::system_clock::time_point start =
+                                std::chrono::high_resolution_clock::now();
+                        for (int i = 0;
+                             i < ((Exp_Size[X] * byte_in_Kb)/ byte_in_int);
+                             i += int_in_line) {
+                            k += arr[i % ((Exp_Size[X] * byte_in_Kb)/ byte_in_int) ];
+                        }
+                        std::chrono::system_clock::time_point end =
+                                std::chrono::high_resolution_clock::now();
+                        Duration.at(t).push_back(static_cast<int>(std::chrono::
+                        nanoseconds((end - start) / Count).count()));
+                    }
+                    break;
+                case Reverse:
+                    Exp_Name[t] = "Reverse";
+                    for (int j = 0; j < Count; ++j) {
+                        std::chrono::system_clock::time_point start =
+                                std::chrono::high_resolution_clock::now();
+                        for (int i = ((Exp_Size[X] * byte_in_Kb)/ byte_in_int) - 1;
+                             i > 0;
+                             i -= int_in_line) {
+                            k += arr[i % ((Exp_Size[X] * byte_in_Kb)/ byte_in_int) ];
+                        }
+                        std::chrono::system_clock::time_point end =
+                                std::chrono::high_resolution_clock::now();
+                        Duration.at(t).push_back(static_cast<int>(std::chrono::
+                        nanoseconds((end - start) / Count).count()));
+                    }
+                    break;
+                case Random:
+                    Exp_Name[t] = "Random";
+                    for (int j = 0; j < Count; ++j) {
+                        std::set<int> num;
+                        std::chrono::system_clock::time_point start =
+                                std::chrono::high_resolution_clock::now();
+                        for (int i = 0;
+                             i < ((Exp_Size[X] * byte_in_Kb)/ byte_in_int);
+                             i += int_in_line) {
+                            int n = 0;
+                            n = random() % ((Exp_Size[X] * byte_in_Kb)/ byte_in_int) ;
+                            while (num.find(n) != num.end()) {
+                                break;
+                            }
+                            k += arr[n % ((Exp_Size[X] * byte_in_Kb)/ byte_in_int) ];
+                        }
+                        std::chrono::system_clock::time_point end =
+                                std::chrono::high_resolution_clock::now();
+                        Duration.at(t).push_back(static_cast<int>(std::chrono::
+                        nanoseconds((end - start) / Count).count()));
+                    }
+                    break;
+            }
+        }
+        delete[] arr;
     }
-    delete[] arr;
 }
 
 std::ostream &operator<<(std::ostream &os, const Cache &cacher) {
