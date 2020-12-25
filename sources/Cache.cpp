@@ -26,16 +26,16 @@ void Cache::Find_Exp_Size() {
 }
 
 Cache::Cache(std::vector<Type> types) {
-    for (int X = 0; X < Num_Exp; ++X) {
+    for (int Num_of_buffer = 0; Num_of_buffer < Num_Exp; ++Num_of_buffer) {
         Find_Exp_Size();
         Duration.resize(Research);
-        int *arr = new int[((Exp_Size[X] * byte_in_Kb)/ byte_in_int)];
-        for (int i = 0; i < ((Exp_Size[X] * byte_in_Kb)/ byte_in_int); i += int_in_line) {
+        int *arr = new int[static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int)];
+        for (int i = 0; i < static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int); i += int_in_line) {
             arr[i] = random();
         }
-        long double k = 0;
+        int k = 0;
         for (int i = 0;
-             i < ((Exp_Size[X] * byte_in_Kb)/ byte_in_int);
+             i < static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int);
              i += int_in_line) {
             k += arr[i];
         }
@@ -47,9 +47,9 @@ Cache::Cache(std::vector<Type> types) {
                         std::chrono::system_clock::time_point start =
                                 std::chrono::high_resolution_clock::now();
                         for (int i = 0;
-                             i < ((Exp_Size[X] * byte_in_Kb)/ byte_in_int);
+                             i < static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int);
                              i += int_in_line) {
-                            k += arr[i % ((Exp_Size[X] * byte_in_Kb)/ byte_in_int) ];
+                            k += arr[i % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int)];
                         }
                         std::chrono::system_clock::time_point end =
                                 std::chrono::high_resolution_clock::now();
@@ -62,10 +62,10 @@ Cache::Cache(std::vector<Type> types) {
                     for (int j = 0; j < Count; ++j) {
                         std::chrono::system_clock::time_point start =
                                 std::chrono::high_resolution_clock::now();
-                        for (int i = ((Exp_Size[X] * byte_in_Kb)/ byte_in_int) - 1;
+                        for (int i = static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int);
                              i > 0;
                              i -= int_in_line) {
-                            k += arr[i % ((Exp_Size[X] * byte_in_Kb)/ byte_in_int) ];
+                            k += arr[i % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int)];
                         }
                         std::chrono::system_clock::time_point end =
                                 std::chrono::high_resolution_clock::now();
@@ -80,14 +80,14 @@ Cache::Cache(std::vector<Type> types) {
                         std::chrono::system_clock::time_point start =
                                 std::chrono::high_resolution_clock::now();
                         for (int i = 0;
-                             i < ((Exp_Size[X] * byte_in_Kb)/ byte_in_int);
+                             i < static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int);
                              i += int_in_line) {
                             int n = 0;
-                            n = random() % ((Exp_Size[X] * byte_in_Kb)/ byte_in_int) ;
+                            n += random() % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int);
                             while (num.find(n) != num.end()) {
                                 break;
                             }
-                            k += arr[n % ((Exp_Size[X] * byte_in_Kb)/ byte_in_int) ];
+                            k += arr[n % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int)];
                         }
                         std::chrono::system_clock::time_point end =
                                 std::chrono::high_resolution_clock::now();
