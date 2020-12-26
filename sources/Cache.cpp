@@ -98,13 +98,13 @@ Cache::Cache(std::vector<Type> types) {
                             for (int i = 0;
                                  i < static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int);
                                  i += int_in_line) {
-                                std::vector<int> num;
+                                std::set<int> num;
                                 int n = 0;
                                 n += random() % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int);
-                                k += arr[n % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int)];
-                                while (num[n] == num.back()) {
-                                    break;
+                                while (num.find(n) != num.end()) {
+                                    n += random() % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int);
                                 }
+                                k += arr[n % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int)];
                             }
                         }
                         std::chrono::system_clock::time_point end =
