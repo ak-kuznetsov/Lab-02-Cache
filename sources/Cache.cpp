@@ -30,8 +30,14 @@ Cache::Cache(std::vector<Type> types) {
         Find_Exp_Size();
         Duration.resize(Research);
         int *arr = new int[static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int)];
+        std::set<int> values;
+        int value;
         for (int i = 0; i < static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int); i += int_in_line) {
-            arr[i] = random();
+            value = (random() % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int));
+        while (values.find(value) != values.end()) {
+            value = (random() % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int));
+        }
+        arr[i] = value % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int);
         }
         for (int t = 0; t < 3; ++t) {
             switch (types[t]) {
@@ -100,9 +106,9 @@ Cache::Cache(std::vector<Type> types) {
                                  i += int_in_line) {
                                 std::set<int> num;
                                 int n = 0;
-                                n += random() % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int);
+                                n = random() % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int);
                                 while (num.find(n) != num.end()) {
-                                    n += random() % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int);
+                                    n = random() % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int);
                                 }
                                 k += arr[n % static_cast<int>((Exp_Size[Num_of_buffer] * byte_in_Kb) / byte_in_int)];
                             }
